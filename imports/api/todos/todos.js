@@ -14,13 +14,16 @@ class TodosCollection extends Mongo.Collection {
     incompleteCountDenormalizer.afterInsertTodo(ourDoc);
     return result;
   }
+
   update(selector, modifier) {
     const result = super.update(selector, modifier);
     incompleteCountDenormalizer.afterUpdateTodo(selector, modifier);
     return result;
   }
+
   remove(selector) {
-    const todos = this.find(selector).fetch();
+    const todos = this.find(selector)
+      .fetch();
     const result = super.remove(selector);
     incompleteCountDenormalizer.afterRemoveTodos(todos);
     return result;
@@ -31,9 +34,15 @@ export const Todos = new TodosCollection('todos');
 
 // Deny all client-side updates since we will be using methods to manage this collection
 Todos.deny({
-  insert() { return true; },
-  update() { return true; },
-  remove() { return true; },
+  insert() {
+    return true;
+  },
+  update() {
+    return true;
+  },
+  remove() {
+    return true;
+  },
 });
 
 Todos.schema = new SimpleSchema({
@@ -87,6 +96,7 @@ Todos.helpers({
     return Lists.findOne(this.listId);
   },
   editableBy(userId) {
-    return this.list().editableBy(userId);
+    return this.list()
+      .editableBy(userId);
   },
 });

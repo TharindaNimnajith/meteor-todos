@@ -28,9 +28,13 @@ describe('Todos_item', function () {
     };
 
     withRenderedTemplate('Todos_item', data, (el) => {
-      chai.assert.equal($(el).find('input[type=text]').val(), todo.text);
-      chai.assert.equal($(el).find('.list-item.checked').length, 0);
-      chai.assert.equal($(el).find('.list-item.editing').length, 0);
+      chai.assert.equal($(el)
+        .find('input[type=text]')
+        .val(), todo.text);
+      chai.assert.equal($(el)
+        .find('.list-item.checked').length, 0);
+      chai.assert.equal($(el)
+        .find('.list-item.editing').length, 0);
     });
   });
 
@@ -42,8 +46,11 @@ describe('Todos_item', function () {
     };
 
     withRenderedTemplate('Todos_item', data, (el) => {
-      chai.assert.equal($(el).find('input[type=text]').val(), todo.text);
-      chai.assert.equal($(el).find('.list-item.checked').length, 1);
+      chai.assert.equal($(el)
+        .find('input[type=text]')
+        .val(), todo.text);
+      chai.assert.equal($(el)
+        .find('.list-item.checked').length, 1);
     });
   });
 
@@ -56,8 +63,11 @@ describe('Todos_item', function () {
     };
 
     withRenderedTemplate('Todos_item', data, (el) => {
-      chai.assert.equal($(el).find('input[type=text]').val(), todo.text);
-      chai.assert.equal($(el).find('.list-item.editing').length, 1);
+      chai.assert.equal($(el)
+        .find('input[type=text]')
+        .val(), todo.text);
+      chai.assert.equal($(el)
+        .find('.list-item.editing').length, 1);
     });
   });
 });

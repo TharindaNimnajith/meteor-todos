@@ -63,10 +63,12 @@ Template.App_body.helpers({
     return instance.state.get('userMenuOpen');
   },
   lists() {
-    return Lists.find({ $or: [
-      { userId: { $exists: false } },
-      { userId: Meteor.userId() },
-    ] });
+    return Lists.find({
+      $or: [
+        { userId: { $exists: false } },
+        { userId: Meteor.userId() },
+      ],
+    });
   },
   activeListClass(list) {
     const active = ActiveRoute.name('Lists.show')
@@ -145,7 +147,9 @@ Template.App_body.events({
   },
 
   'click .js-toggle-language'(event) {
-    const language = $(event.target).html().trim();
+    const language = $(event.target)
+      .html()
+      .trim();
     T9n.setLanguage(language);
     TAPi18n.setLanguage(language);
   },

@@ -35,5 +35,6 @@ if (Meteor.isClient) {
     testConnection.call('generateFixtures', cb);
   });
 
-  export { generateData };
+export
+  { generateData };
 }

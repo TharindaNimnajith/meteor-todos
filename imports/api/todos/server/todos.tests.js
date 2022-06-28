@@ -3,7 +3,7 @@
 
 import { Factory } from 'meteor/dburles:factory';
 import { PublicationCollector } from 'meteor/johanbrook:publication-collector';
-import { chai, assert } from 'meteor/practicalmeteor:chai';
+import { assert, chai } from 'meteor/practicalmeteor:chai';
 import { Random } from 'meteor/random';
 import { _ } from 'meteor/underscore';
 import { Todos } from '../todos.js';
@@ -49,7 +49,7 @@ describe('todos', function () {
           (collections) => {
             chai.assert.equal(collections.todos.length, 3);
             done();
-          }
+          },
         );
       });
       it('sends all todos for a public list when logged in', function (done) {
@@ -60,7 +60,7 @@ describe('todos', function () {
           (collections) => {
             chai.assert.equal(collections.todos.length, 3);
             done();
-          }
+          },
         );
       });
       it('sends all todos for a private list when logged in as owner', function (done) {
@@ -71,7 +71,7 @@ describe('todos', function () {
           (collections) => {
             chai.assert.equal(collections.todos.length, 3);
             done();
-          }
+          },
         );
       });
       it('sends no todos for a private list when not logged in', function (done) {
@@ -82,7 +82,7 @@ describe('todos', function () {
           (collections) => {
             chai.assert.isUndefined(collections.todos);
             done();
-          }
+          },
         );
       });
       it('sends no todos for a private list when logged in as another user', function (done) {
@@ -93,7 +93,7 @@ describe('todos', function () {
           (collections) => {
             chai.assert.isUndefined(collections.todos);
             done();
-          }
+          },
         );
       });
     });

@@ -9,7 +9,9 @@ import { Lists } from '../lists/lists.js';
 
 export const insert = new ValidatedMethod({
   name: 'todos.insert',
-  validate: Todos.simpleSchema().pick(['listId', 'text']).validator({ clean: true, filter: false }),
+  validate: Todos.simpleSchema()
+    .pick(['listId', 'text'])
+    .validator({ clean: true, filter: false }),
   run({ listId, text }) {
     const list = Lists.findOne(listId);
 
@@ -32,8 +34,10 @@ export const insert = new ValidatedMethod({
 export const setCheckedStatus = new ValidatedMethod({
   name: 'todos.makeChecked',
   validate: new SimpleSchema({
-    todoId: Todos.simpleSchema().schema('_id'),
-    newCheckedStatus: Todos.simpleSchema().schema('checked'),
+    todoId: Todos.simpleSchema()
+      .schema('_id'),
+    newCheckedStatus: Todos.simpleSchema()
+      .schema('checked'),
   }).validator({ clean: true, filter: false }),
   run({ todoId, newCheckedStatus }) {
     const todo = Todos.findOne(todoId);
@@ -48,17 +52,21 @@ export const setCheckedStatus = new ValidatedMethod({
         'Cannot edit checked status in a private list that is not yours');
     }
 
-    Todos.update(todoId, { $set: {
-      checked: newCheckedStatus,
-    } });
+    Todos.update(todoId, {
+      $set: {
+        checked: newCheckedStatus,
+      },
+    });
   },
 });
 
 export const updateText = new ValidatedMethod({
   name: 'todos.updateText',
   validate: new SimpleSchema({
-    todoId: Todos.simpleSchema().schema('_id'),
-    newText: Todos.simpleSchema().schema('text'),
+    todoId: Todos.simpleSchema()
+      .schema('_id'),
+    newText: Todos.simpleSchema()
+      .schema('text'),
   }).validator({ clean: true, filter: false }),
   run({ todoId, newText }) {
     // This is complex auth stuff - perhaps denormalizing a userId onto todos
@@ -81,7 +89,8 @@ export const updateText = new ValidatedMethod({
 export const remove = new ValidatedMethod({
   name: 'todos.remove',
   validate: new SimpleSchema({
-    todoId: Todos.simpleSchema().schema('_id'),
+    todoId: Todos.simpleSchema()
+      .schema('_id'),
   }).validator({ clean: true, filter: false }),
   run({ todoId }) {
     const todo = Todos.findOne(todoId);
@@ -111,6 +120,8 @@ if (Meteor.isServer) {
     },
 
     // Rate limit per connection ID
-    connectionId() { return true; },
+    connectionId() {
+      return true;
+    },
   }, 5, 1000);
 }

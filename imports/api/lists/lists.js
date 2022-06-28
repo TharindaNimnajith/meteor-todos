@@ -22,6 +22,7 @@ class ListsCollection extends Mongo.Collection {
 
     return super.insert(ourList, callback);
   }
+
   remove(selector, callback) {
     Todos.remove({ listId: selector });
     return super.remove(selector, callback);
@@ -32,9 +33,15 @@ export const Lists = new ListsCollection('lists');
 
 // Deny all client-side updates since we will be using methods to manage this collection
 Lists.deny({
-  insert() { return true; },
-  update() { return true; },
-  remove() { return true; },
+  insert() {
+    return true;
+  },
+  update() {
+    return true;
+  },
+  remove() {
+    return true;
+  },
 });
 
 Lists.schema = new SimpleSchema({
@@ -63,7 +70,8 @@ Lists.helpers({
     return !!this.userId;
   },
   isLastPublicList() {
-    const publicListCount = Lists.find({ userId: { $exists: false } }).count();
+    const publicListCount = Lists.find({ userId: { $exists: false } })
+      .count();
     return !this.isPrivate() && publicListCount === 1;
   },
   editableBy(userId) {

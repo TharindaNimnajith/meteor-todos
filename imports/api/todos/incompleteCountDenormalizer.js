@@ -10,7 +10,8 @@ const incompleteCountDenormalizer = {
     const incompleteCount = Todos.find({
       listId,
       checked: false,
-    }).count();
+    })
+      .count();
 
     Lists.update(listId, { $set: { incompleteCount } });
   },
@@ -23,9 +24,10 @@ const incompleteCountDenormalizer = {
 
     // We can only deal with $set modifiers, but that's all we do in this app
     if (_.has(modifier.$set, 'checked')) {
-      Todos.find(selector, { fields: { listId: 1 } }).forEach((todo) => {
-        this._updateList(todo.listId);
-      });
+      Todos.find(selector, { fields: { listId: 1 } })
+        .forEach((todo) => {
+          this._updateList(todo.listId);
+        });
     }
   },
   // Here we need to take the list of todos being removed, selected *before* the update

@@ -16,7 +16,7 @@
             <a href="#" class="js-user-menu btn-secondary">
               {{#if userMenuOpen}}
                 <span class="icon-arrow-up"></span>
-                {{else}}
+              {{else}}
                 <span class="icon-arrow-down"></span>
               {{/if}}
 
@@ -47,7 +47,7 @@
 
           {{#each list in lists}}
             <a href="{{pathFor 'Lists.show' _id=list._id}}" title="{{list.name}}"
-                class="list-todo {{activeListClass list}}">
+               class="list-todo {{activeListClass list}}">
               {{#if list.userId}}
                 <span class="icon-lock"></span>
               {{/if}}

@@ -48,9 +48,12 @@ describe('Lists_show_page', function () {
     }));
 
     withRenderedTemplate('Lists_show_page', {}, (el) => {
-      const todosText = todos.map(t => t.text).reverse();
-      const renderedText = $(el).find('.list-items input[type=text]')
-        .map((i, e) => $(e).val())
+      const todosText = todos.map(t => t.text)
+        .reverse();
+      const renderedText = $(el)
+        .find('.list-items input[type=text]')
+        .map((i, e) => $(e)
+          .val())
         .toArray();
       chai.assert.deepEqual(renderedText, todosText);
     });

@@ -39,7 +39,8 @@ if (Meteor.isClient) {
 
     describe('when logged out', () => {
       it('has all public lists at homepage', () => {
-        assert.equal(Lists.find().count(), 3);
+        assert.equal(Lists.find()
+          .count(), 3);
       });
 
       it('renders the correct list when routed to', () => {
@@ -49,8 +50,10 @@ if (Meteor.isClient) {
         return afterFlushPromise()
           .then(waitForSubscriptions)
           .then(() => {
-            assert.equal($('.title-wrapper').html(), list.name);
-            assert.equal(Todos.find({ listId: list._id }).count(), 3);
+            assert.equal($('.title-wrapper')
+              .html(), list.name);
+            assert.equal(Todos.find({ listId: list._id })
+              .count(), 3);
           });
       });
     });

@@ -7,7 +7,8 @@ import { _ } from 'meteor/underscore';
 import { Lists } from './lists.js';
 
 const LIST_ID_ONLY = new SimpleSchema({
-  listId: Lists.simpleSchema().schema('_id'),
+  listId: Lists.simpleSchema()
+    .schema('_id'),
 }).validator({ clean: true, filter: false });
 
 export const insert = new ValidatedMethod({
@@ -71,8 +72,10 @@ export const makePublic = new ValidatedMethod({
 export const updateName = new ValidatedMethod({
   name: 'lists.updateName',
   validate: new SimpleSchema({
-    listId: Lists.simpleSchema().schema('_id'),
-    newName: Lists.simpleSchema().schema('name'),
+    listId: Lists.simpleSchema()
+      .schema('_id'),
+    newName: Lists.simpleSchema()
+      .schema('name'),
   }).validator({ clean: true, filter: false }),
   run({ listId, newName }) {
     const list = Lists.findOne(listId);
@@ -131,6 +134,8 @@ if (Meteor.isServer) {
     },
 
     // Rate limit per connection ID
-    connectionId() { return true; },
+    connectionId() {
+      return true;
+    },
   }, 5, 1000);
 }

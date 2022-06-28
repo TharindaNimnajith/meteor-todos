@@ -3,13 +3,13 @@
 
 import { Factory } from 'meteor/dburles:factory';
 import { PublicationCollector } from 'meteor/johanbrook:publication-collector';
-import { chai, assert } from 'meteor/practicalmeteor:chai';
+import { assert, chai } from 'meteor/practicalmeteor:chai';
 import { Random } from 'meteor/random';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { DDP } from 'meteor/ddp-client';
 import { Lists } from '../lists.js';
-import { insert, makePublic, makePrivate, updateName, remove } from '../methods.js';
+import { insert, makePrivate, makePublic, remove, updateName } from '../methods.js';
 import { Todos } from '../../todos/todos.js';
 import '../../../../i18n/en.i18n.json';
 import './publications.js';
@@ -76,14 +76,18 @@ describe('lists', function () {
     describe('makePrivate / makePublic', function () {
       function assertListAndTodoArePrivate() {
         assert.equal(Lists.findOne(listId).userId, userId);
-        assert.isTrue(Lists.findOne(listId).isPrivate());
-        assert.isTrue(Todos.findOne(todoId).editableBy(userId));
-        assert.isFalse(Todos.findOne(todoId).editableBy(Random.id()));
+        assert.isTrue(Lists.findOne(listId)
+          .isPrivate());
+        assert.isTrue(Todos.findOne(todoId)
+          .editableBy(userId));
+        assert.isFalse(Todos.findOne(todoId)
+          .editableBy(Random.id()));
       }
 
       it('makes a list private and updates the todos', function () {
         // Check initial state is public
-        assert.isFalse(Lists.findOne(listId).isPrivate());
+        assert.isFalse(Lists.findOne(listId)
+          .isPrivate());
         // Set up method arguments and context
         const methodInvocation = { userId };
         const args = { listId };
@@ -93,7 +97,8 @@ describe('lists', function () {
         // Making the list public removes it
         makePublic._execute(methodInvocation, args);
         assert.isUndefined(Todos.findOne(todoId).userId);
-        assert.isTrue(Todos.findOne(todoId).editableBy(userId));
+        assert.isTrue(Todos.findOne(todoId)
+          .editableBy(userId));
       });
       it('only works if you are logged in', function () {
         // Set up method arguments and context

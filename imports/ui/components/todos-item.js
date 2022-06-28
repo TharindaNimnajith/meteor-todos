@@ -6,11 +6,7 @@ import { _ } from 'meteor/underscore';
 import './todos-item.html';
 import { Todos } from '../../api/todos/todos.js';
 
-import {
-  setCheckedStatus,
-  updateText,
-  remove,
-} from '../../api/todos/methods.js';
+import { remove, setCheckedStatus, updateText } from '../../api/todos/methods.js';
 
 import { displayError } from '../lib/errors.js';
 
@@ -35,7 +31,8 @@ Template.Todos_item.helpers({
 
 Template.Todos_item.events({
   'change [type=checkbox]'(event) {
-    const checked = $(event.target).is(':checked');
+    const checked = $(event.target)
+      .is(':checked');
 
     setCheckedStatus.call({
       todoId: this.todo._id,

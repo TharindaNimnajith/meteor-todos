@@ -15,16 +15,9 @@ import './lists-show.html';
 // Component used in the template
 import './todos-item.js';
 
-import {
-  updateName,
-  makePublic,
-  makePrivate,
-  remove,
-} from '../../api/lists/methods.js';
+import { makePrivate, makePublic, remove, updateName } from '../../api/lists/methods.js';
 
-import {
-  insert,
-} from '../../api/todos/methods.js';
+import { insert } from '../../api/todos/methods.js';
 
 import { displayError } from '../lib/errors.js';
 
@@ -46,7 +39,9 @@ Template.Lists_show.onCreated(function listShowOnCreated() {
   this.saveList = () => {
     this.state.set('editing', false);
 
-    const newName = this.$('[name=name]').val().trim();
+    const newName = this.$('[name=name]')
+      .val()
+      .trim();
     if (newName) {
       updateName.call({
         listId: this.data.list()._id,
@@ -62,7 +57,8 @@ Template.Lists_show.onCreated(function listShowOnCreated() {
     Tracker.flush();
     // We need to wait for the fade in animation to complete to reliably focus the input
     Meteor.setTimeout(() => {
-      this.$('.js-edit-form input[type=text]').focus();
+      this.$('.js-edit-form input[type=text]')
+        .focus();
     }, 400);
   };
 
@@ -118,7 +114,8 @@ Template.Lists_show.events({
     // ESC
     if (event.which === 27) {
       event.preventDefault();
-      $(event.target).blur();
+      $(event.target)
+        .blur();
     }
   },
 
@@ -144,9 +141,11 @@ Template.Lists_show.events({
   // This is for the mobile dropdown
   'change .list-edit'(event, instance) {
     const target = event.target;
-    if ($(target).val() === 'edit') {
+    if ($(target)
+      .val() === 'edit') {
       instance.editList();
-    } else if ($(target).val() === 'delete') {
+    } else if ($(target)
+      .val() === 'delete') {
       instance.deleteList();
     } else {
       instance.toggleListPrivacy();
@@ -168,13 +167,15 @@ Template.Lists_show.events({
   },
 
   'click .js-todo-add'(event, instance) {
-    instance.$('.js-todo-new input').focus();
+    instance.$('.js-todo-new input')
+      .focus();
   },
 
   'submit .js-todo-new'(event) {
     event.preventDefault();
 
-    const $input = $(event.target).find('[type=text]');
+    const $input = $(event.target)
+      .find('[type=text]');
     if (!$input.val()) {
       return;
     }

@@ -46,8 +46,10 @@ describe('Lists_show', function () {
 
     withRenderedTemplate('Lists_show', data, (el) => {
       const todosText = todosCursor.map(t => t.text);
-      const renderedText = $(el).find('.list-items input[type=text]')
-        .map((i, e) => $(e).val())
+      const renderedText = $(el)
+        .find('.list-items input[type=text]')
+        .map((i, e) => $(e)
+          .val())
         .toArray();
       chai.assert.deepEqual(renderedText, todosText);
     });

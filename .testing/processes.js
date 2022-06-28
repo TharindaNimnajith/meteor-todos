@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 var fs = require('fs');
 var exec = require('child_process').exec;
 var processes = [];
@@ -10,14 +10,15 @@ var processes = [];
  * app started its mongoDb, so we can reuse that for the test app.
  */
 module.exports = {
-  start: function(opts, callback) {
+  start: function (opts, callback) {
     var proc = exec(
-       opts.command,
-       opts.options
+      opts.command,
+      opts.options,
     );
     if (opts.waitForMessage) {
       proc.stdout.on('data', function waitForMessage(data) {
-        if (data.toString().match(opts.waitForMessage)) {
+        if (data.toString()
+          .match(opts.waitForMessage)) {
           if (callback) {
             callback();
           }
@@ -29,11 +30,11 @@ module.exports = {
       proc.stderr.pipe(process.stderr);
     }
     if (opts.logFile) {
-      var logStream = fs.createWriteStream(opts.logFile, {flags: 'a'});
+      var logStream = fs.createWriteStream(opts.logFile, { flags: 'a' });
       proc.stdout.pipe(logStream);
       proc.stderr.pipe(logStream);
     }
-    proc.on('close', function(code) {
+    proc.on('close', function (code) {
       console.log(opts.name, 'exited with code ' + code);
       for (var i = 0; i < processes.length; i += 1) {
         processes[i].kill();
@@ -41,5 +42,5 @@ module.exports = {
       process.exit(code);
     });
     processes.push(proc);
-  }
+  },
 };

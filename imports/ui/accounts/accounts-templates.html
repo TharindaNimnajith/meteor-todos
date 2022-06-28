@@ -23,10 +23,12 @@
 </template>
 
 <template name="override-atTextInput">
-  <div class="input {{#if isValidating}}validating{{/if}} {{#if hasError}}error{{/if}} {{#if hasSuccess}}has-success{{/if}} {{#if feedback}}has-feedback{{/if}}">
-    <input type="{{type}}" id="at-field-{{_id}}" name="at-field-{{_id}}" placeholder="{{placeholder}}" autocapitalize="none" autocorrect="off">
+  <div class="input {{#if isValidating}}validating{{/if}} {{#if hasError}}error{{/if}} {{#if
+    hasSuccess}}has-success{{/if}} {{#if feedback}}has-feedback{{/if}}">
+    <input type="{{type}}" id="at-field-{{_id}}" name="at-field-{{_id}}" placeholder="{{placeholder}}"
+           autocapitalize="none" autocorrect="off">
     {{#if hasIcon}}
-        <span class="{{iconClass}}"></span>
+      <span class="{{iconClass}}"></span>
     {{/if}}
     {{#if hasError}}
       <span>{{errorText}}</span>

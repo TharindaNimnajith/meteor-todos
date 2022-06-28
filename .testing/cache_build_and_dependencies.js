@@ -5,18 +5,18 @@ const spawn = require('child_process').spawn;
 const baseDir = path.resolve(__dirname, '../');
 const srcDir = baseDir;
 
-const cacheMeteor = function() {
+const cacheMeteor = function () {
   console.log('Caching build & dependencies (can take a while the first time)');
   const childProcess = spawn('meteor', ['--raw-logs'], {
     cwd: srcDir,
-    env: process.env
+    env: process.env,
   });
   childProcess.stdout.setEncoding('utf8');
   childProcess.stderr.setEncoding('utf8');
-  childProcess.stdout.on('data', function(line) {
+  childProcess.stdout.on('data', function (line) {
     process.stdout.write(line);
   });
-  childProcess.stderr.on('data', function(line) {
+  childProcess.stderr.on('data', function (line) {
     process.stderr.write(line);
   });
   const exitAfterBuild = function exitAfterBuild(line) {

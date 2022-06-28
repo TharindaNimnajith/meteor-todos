@@ -22,8 +22,13 @@
     background-color: @color-primary;
     color: @color-empty;
 
-    &:hover { background-color: darken(@color-primary, 5%); }
-    &:active { box-shadow: rgba(0,0,0,.3) 0 1px 3px 0 inset; }
+    &:hover {
+      background-color: darken(@color-primary, 5%);
+    }
+
+    &:active {
+      box-shadow: rgba(0, 0, 0, .3) 0 1px 3px 0 inset;
+    }
   }
 
   &[class*="secondary"] {
@@ -31,14 +36,19 @@
     box-shadow: lighten(#517096, 5%) 0 0 0 1px inset;
     color: @color-empty;
 
-    &:hover{ color: @color-rare; }
+    &:hover {
+      color: @color-rare;
+    }
+
     &:active,
     &.active {
       box-shadow: lighten(#517096, 25%) 0 0 0 1px inset;
     }
   }
 
-  &[disabled] { opacity: .5; }
+  &[disabled] {
+    opacity: .5;
+  }
 }
 
 .btns-group {
@@ -50,6 +60,8 @@
     .ellipsized;
     flex: 1;
 
-    & + [class*="btn-"] { margin-left: -1px; }
+    & + [class*="btn-"] {
+      margin-left: -1px;
+    }
   }
 }
